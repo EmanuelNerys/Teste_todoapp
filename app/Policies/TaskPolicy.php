@@ -11,15 +11,18 @@ class TaskPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can delete the task.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Auth\Access\Response|bool
+     * 
+     */
+    public function update(User $user, Task $task)
+    {
+        return $user->id === $task->user_id;
+    }
+
+    /**
+     * 
      */
     public function delete(User $user, Task $task)
     {
-     
         return $user->id === $task->user_id;
     }
 }
