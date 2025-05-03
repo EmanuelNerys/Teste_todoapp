@@ -10,12 +10,28 @@ class TaskController extends Controller
 {
     use AuthorizesRequests;
 
-    public function index()
+    public function index(Request $request)
     {
-        
-        $tasks = auth()->user()->tasks()->get();
-        return view('tasks.index', compact('tasks'));
+       
+        $query = auth()->user()->tasks();
+    
+       
+        if ($request->has('status') && in_array($request->status, ['pendente', 'concluída'])) {
+            $query->where('status', $request->status);
+        }
+    
+   
+        $tasks = $query->paginate(10); 
+    
+       
+        return view('tasks.index', [
+            'tasks' => $tasks,
+            'selectedStatus' => $request->status,
+        ]);
     }
+    
+    
+    
 
     public function store(Request $request)
     {

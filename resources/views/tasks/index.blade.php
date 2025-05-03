@@ -4,6 +4,24 @@
     <div class="container mt-4">
         <h1 class="mb-4">Minhas Tarefas</h1>
 
+        <!-- Filtro de Status -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Filtrar Tarefas</h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('tasks.index') }}" method="GET">
+                    <div class="d-flex">
+                        <select name="status" class="form-select" onchange="this.form.submit()">
+                            <option value="">Todas</option>
+                            <option value="pendente" {{ $selectedStatus === 'pendente' ? 'selected' : '' }}>Pendente</option>
+                            <option value="concluída" {{ $selectedStatus === 'concluída' ? 'selected' : '' }}>Concluída</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <!-- Tabela de Tarefas -->
         <div class="card mb-4">
             <div class="card-header">
@@ -30,7 +48,6 @@
                                     </span>
                                 </td>
                                 <td>
-                                   
                                     <a href="{{ route('tasks.edit', $task) }}" class="btn btn-warning btn-sm">Editar</a>
                                     <form action="{{ route('tasks.destroy', $task) }}" method="POST" style="display:inline;">
                                         @csrf
@@ -42,10 +59,15 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                <!-- Paginação -->
+                <div class="d-flex justify-content-center">
+                    {{ $tasks->links() }}
+                </div>
             </div>
         </div>
 
-      
+        <!-- Formulário para adicionar nova tarefa -->
         <div class="card">
             <div class="card-header">
                 <h5>Adicionar Nova Tarefa</h5>
