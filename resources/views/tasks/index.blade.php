@@ -30,7 +30,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <!-- Botões de Edição e Exclusão -->
+                                   
                                     <a href="{{ route('tasks.edit', $task) }}" class="btn btn-warning btn-sm">Editar</a>
                                     <form action="{{ route('tasks.destroy', $task) }}" method="POST" style="display:inline;">
                                         @csrf
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <!-- Formulário para Criar Nova Tarefa -->
+      
         <div class="card">
             <div class="card-header">
                 <h5>Adicionar Nova Tarefa</h5>

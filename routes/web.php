@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Rotas para as tarefas (To-Do List)
+    
     Route::resource('tasks', TaskController::class); // Rotas completas para CRUD
 });
 
